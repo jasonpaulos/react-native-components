@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-native';
 import data from '@solid/query-ldflex';
 import { srcToLDflex } from '../util';
 import useLDflexValue from '../hooks/useLDflexValue';
@@ -14,7 +15,7 @@ export default function ActivityButton({
   object = `[${window.location.href}]`,
   children,
   shortName = /\w*$/.exec(activityType)[0],
-  className = `solid activity ${shortName.toLowerCase()}`,
+  // className = `solid activity ${shortName.toLowerCase()}`,
   activateText = shortName,
   deactivateText = activateText,
   activateLabel = children ? [activateText, ' ', children] : activateText,
@@ -47,11 +48,14 @@ export default function ActivityButton({
   }
 
   // Return the activity button
-  className = `${className} ${exists ? 'performed' : ''}`;
+  // className = `${className} ${exists ? 'performed' : ''}`;
   return (
-    <button className={className} onClick={toggleActivity} {...props}>
-      { exists ? deactivateLabel : activateLabel }
-    </button>
+    <Button
+      title={exists ? deactivateLabel : activateLabel}
+      // className={className}
+      onPress={toggleActivity}
+      {...props}
+    />
   );
 }
 
